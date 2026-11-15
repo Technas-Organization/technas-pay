@@ -44,7 +44,7 @@ Un pays n'est proposé que si au moins un opérateur y encaisse. Relevé le 15 n
 | Mali | `XOF` | Mobi Cash, Moov Money, Orange Money |
 | Niger | `XOF` | Airtel |
 | Sénégal | `XOF` | Djamo, Expresso, Free Money, Orange Money, Wave, Wizall, compte PayDunya |
-| Togo | `XOF` | Mixx, Moov Money, Togocel Money |
+| Togo | `XOF` | Moov Money, Togocel Money |
 | Cameroun | `XAF` | MTN MoMo, Orange Money |
 | Congo | `XAF` | Airtel, MTN |
 | Gabon | `XAF` | Airtel, Moov Money |
