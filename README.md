@@ -73,6 +73,18 @@ final result = await showTechnasPayment(context, backend: technasPay, order: {'o
 
 Le détail est dans le README de chaque SDK (tableau en tête de page).
 
+## Quand le client change d'offre ou revient plus tard
+
+Le client choisit une offre, ouvre la page de paiement, ne paie pas, puis revient en choisir une autre, ou revient le lendemain. Cinq règles suffisent pour ne jamais lui répondre « un paiement existe déjà » alors que rien n'a été payé :
+
+1. **Une référence = un essai.** Nouvelle offre, ou retour après expiration : nouvel essai, avec une nouvelle référence (`retryReference(factureId, n)`). Réutiliser la référence d'un essai d'un autre montant rend `409 reference_conflict` ; celle d'un essai expiré, `409 payment_expired`.
+2. **Une facture n'est payée que sur l'avis `payment.completed`.** Jamais au retour du navigateur sur `returnUrl`, jamais à l'ouverture de la page.
+3. **Un essai non payé ne bloque jamais un nouvel essai.** En attente ou refusé, si le client change d'offre, créez le nouvel essai. Expiré, laissez-le recommencer.
+4. **Au retour du client, vérifiez d'abord** avec `getPayment` sur le dernier essai, avant de lui dire quoi que ce soit. Ne vous fiez jamais à votre seule base.
+5. **Si un ancien essai est payé après le nouveau,** n'activez rien deux fois : remboursez l'essai en trop avec `refund`.
+
+Les routes toutes faites des SDK appliquent déjà ces règles : un `409 reference_conflict` y fait passer à l'essai suivant.
+
 ## Comprendre les paiements
 
 - **[Devises et pays](docs/devises-et-pays.md)** : les deux francs CFA (`XOF` et `XAF`), la devise choisie d'après le pays, les monnaies hors zone, la carte en EUR ou USD.
