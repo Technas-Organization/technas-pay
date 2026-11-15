@@ -14,10 +14,11 @@
 | Next.js (App Router) | [technas-pay-next](https://github.com/Technas-Organization/technas-pay-next) |
 | Node.js : Express, Fastify, NestJS, Hono, Bun, Deno, serverless | [technas-pay-node](https://github.com/Technas-Organization/technas-pay-node) |
 | Python : FastAPI, Django, Flask | [technas-pay-python](https://github.com/Technas-Organization/technas-pay-python) |
+| PHP : Laravel, Symfony, Slim, PHP sans framework | [technas-pay-php](https://github.com/Technas-Organization/technas-pay-php) |
 | Dart côté serveur : shelf, Dart Frog | [technas-pay-dart](https://github.com/Technas-Organization/technas-pay-dart) |
 | App Flutter (Android, iOS, web) | [technas_pay_flutter](https://github.com/Technas-Organization/technas-pay-dart/tree/main/technas_pay_flutter) |
 
-Les quatre SDK serveur ont la même API, et rejouent le même contrat de routes que le client Flutter. Vous pouvez changer de langage côté serveur sans toucher à l'app.
+Les cinq SDK serveur ont la même API, et rejouent le même contrat de routes que le client Flutter. Vous pouvez changer de langage côté serveur sans toucher à l'app.
 
 ## Démarrer en 5 minutes
 
