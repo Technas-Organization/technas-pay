@@ -116,4 +116,4 @@ Ce que Technas Pay apporte en plus, c'est surtout le temps d'intégration : les 
 
 ## Contact
 
-contact@technas.fr. Technas Pay est un service de [Technas](https://technas.fr).
+contact@technas.fr. Présentation : [pay.technas.fr](https://pay.technas.fr). Technas Pay est un service de [Technas](https://technas.fr).
