@@ -22,7 +22,7 @@ Hors zone franc CFA (mode `local`), le solde reste dans la monnaie payée et par
 
 **Au 15 novembre 2026, aucun reversement mobile money vers un partenaire n'est encore parti.**
 
-Les encaissements fonctionnent. Les reversements sont branchés et testés de notre côté, mais le prestataire mobile money par lequel ils passent n'a pas encore ouvert les versements vers des numéros tiers sur notre compte : ses réponses sont des refus `payout_not_enabled`. Son support nous a confirmé que ces versements sont prévus, et vérifie notre compte.
+Les encaissements fonctionnent. Les reversements sont branchés et testés de notre côté, mais notre partenaire mobile money, par lequel ils passent, n'a pas encore ouvert les versements vers des numéros tiers sur notre compte : ses réponses sont des refus `payout_not_enabled`. Son support nous a confirmé que ces versements sont prévus, et vérifie notre compte.
 
 Ce que ça veut dire pour vous :
 
@@ -32,12 +32,12 @@ Ce que ça veut dire pour vous :
 
 Cette section sera mise à jour le jour où le premier reversement part.
 
-## Carte : Stripe vous paie directement
+## Carte : versée directement sur votre banque
 
-L'argent d'un paiement par carte ne passe pas par votre solde Technas. Le client paie votre compte Stripe, Stripe retient la commission Technas au passage, et Stripe vire le reste sur votre banque, au rythme que vous réglez dans votre tableau de bord Stripe. Les paiements par carte n'apparaissent donc pas dans `getBalance()`.
+L'argent d'un paiement par carte ne passe pas par votre solde Technas. Le client paie votre compte carte, la commission Technas est retenue au passage, et le reste est viré sur votre banque, au rythme que vous réglez dans le tableau de bord de votre compte carte. Les paiements par carte n'apparaissent donc pas dans `getBalance()`.
 
 ## Remboursements
 
 - **Mobile money** : `refund` renvoie l'argent au numéro qui a payé, depuis votre solde. Les frais du remboursement sont à votre charge par défaut (`fees: "partner"`), ou retirés de ce que reçoit le client (`fees: "customer"`). La commission n'est pas rendue. Un remboursement passe par le même canal que les versements : tant que celui-ci n'est pas ouvert, il attend lui aussi.
-- **Carte** : `refund` rembourse la carte depuis votre compte Stripe. La commission n'est pas rendue.
+- **Carte** : `refund` rembourse la carte depuis votre compte carte (`refund.kind` vaut `"card"`). La commission n'est pas rendue.
 - Un remboursement fait hors de Technas (espèces, autre portefeuille) s'enregistre avec `recordExternalRefund`, pour que vos comptes restent justes.
