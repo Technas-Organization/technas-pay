@@ -1,25 +1,28 @@
 # Technas Pay
 
-**Le mobile money et la carte, avec un seul SDK.** Vos clients d'Afrique de l'Ouest et du Centre paient par Orange Money, MTN MoMo, Moov Money, Wave ou Mixx, ceux d'ailleurs par carte, et votre code ne fait la différence qu'avec un paramètre : `method: "mobile_money"` ou `method: "card"`.
+**Ce dépôt est le sommaire et la documentation commune. Le code est dans un dépôt par langage :**
+
+| Votre serveur ou votre boutique | Dépôt du SDK |
+|---|---|
+| Next.js (App Router) | [![technas-pay-next](https://img.shields.io/badge/Next.js-technas--pay--next-1f3fd1?logo=nextdotjs)](https://github.com/Technas-Organization/technas-pay-next) |
+| Node.js : Express, Fastify, NestJS, Hono, Bun, Deno, serverless | [![technas-pay-node](https://img.shields.io/badge/Node.js-technas--pay--node-1f3fd1?logo=nodedotjs)](https://github.com/Technas-Organization/technas-pay-node) |
+| Python : FastAPI, Django, Flask | [![technas-pay-python](https://img.shields.io/badge/Python-technas--pay--python-1f3fd1?logo=python)](https://github.com/Technas-Organization/technas-pay-python) |
+| PHP : Laravel, Symfony, Slim, PHP sans framework | [![technas-pay-php](https://img.shields.io/badge/PHP-technas--pay--php-1f3fd1?logo=php)](https://github.com/Technas-Organization/technas-pay-php) |
+| Boutique WooCommerce (sans développeur) | [![technas-pay-woocommerce](https://img.shields.io/badge/WooCommerce-technas--pay--woocommerce-1f3fd1?logo=woocommerce)](https://github.com/Technas-Organization/technas-pay-woocommerce) |
+| Java, Kotlin : Spring Boot, Quarkus, Micronaut, Ktor | [![technas-pay-java](https://img.shields.io/badge/Java%20%2F%20Kotlin-technas--pay--java-1f3fd1?logo=openjdk)](https://github.com/Technas-Organization/technas-pay-java) |
+| Dart côté serveur : shelf, Dart Frog | [![technas-pay-dart](https://img.shields.io/badge/Dart-technas--pay--dart-1f3fd1?logo=dart)](https://github.com/Technas-Organization/technas-pay-dart) |
+| App Flutter (Android, iOS, web) | [![technas_pay_flutter](https://img.shields.io/badge/Flutter-technas__pay__flutter-1f3fd1?logo=flutter)](https://github.com/Technas-Organization/technas-pay-dart/tree/main/technas_pay_flutter) |
+
+Les six SDK serveur ont la même API et rejouent le même contrat de routes que le client Flutter : vous pouvez changer de langage côté serveur sans toucher à l'app.
+
+## L'offre
+
+**La carte bancaire et le mobile money, avec un seul SDK.** Vos clients paient par carte partout dans le monde, ou par mobile money en Afrique de l'Ouest et du Centre (Orange Money, MTN MoMo, Moov Money, Wave…). Votre code ne fait la différence qu'avec un paramètre : `method: "card"` ou `method: "mobile_money"`.
 
 - **Du serveur jusqu'à l'app Flutter, déjà écrit.** Votre serveur monte des routes toutes faites, votre app Flutter affiche le paiement, l'attente, le refus et l'expiration. Une vingtaine de lignes de chaque côté. Aucune clé dans l'app.
-- **Votre assistant de code sait l'intégrer.** Chaque SDK livre un fichier `AGENTS.md` : dites à Codex ou à Claude Code de le lire, il branche le paiement dans votre projet.
-- **Carte : 1 % (plus les frais Stripe de votre compte). Mobile money : 2 % (les frais de l'opérateur sont payés par le client).** Sans abonnement, sans frais d'installation, sans minimum. [Détail des frais](#ce-que-ça-coûte).
-- **Le mode test, sans papier.** Une clé de test suffit pour faire tout le parcours : réussi, refusé, expiré, remboursé, webhooks reçus. En réel, le code est le même.
-
-## Les SDK
-
-| Votre serveur ou votre app | SDK |
-|---|---|
-| Next.js (App Router) | [technas-pay-next](https://github.com/Technas-Organization/technas-pay-next) |
-| Node.js : Express, Fastify, NestJS, Hono, Bun, Deno, serverless | [technas-pay-node](https://github.com/Technas-Organization/technas-pay-node) |
-| Python : FastAPI, Django, Flask | [technas-pay-python](https://github.com/Technas-Organization/technas-pay-python) |
-| PHP : Laravel, Symfony, Slim, PHP sans framework | [technas-pay-php](https://github.com/Technas-Organization/technas-pay-php) |
-| Boutique WooCommerce (sans développeur) | [technas-pay-woocommerce](https://github.com/Technas-Organization/technas-pay-woocommerce) : extension à téléverser, mobile money et carte |
-| Dart côté serveur : shelf, Dart Frog | [technas-pay-dart](https://github.com/Technas-Organization/technas-pay-dart) |
-| App Flutter (Android, iOS, web) | [technas_pay_flutter](https://github.com/Technas-Organization/technas-pay-dart/tree/main/technas_pay_flutter) |
-
-Les cinq SDK serveur ont la même API, et rejouent le même contrat de routes que le client Flutter. Vous pouvez changer de langage côté serveur sans toucher à l'app.
+- **Votre assistant de code sait l'intégrer.** Chaque SDK livre un fichier `AGENTS.md` : demandez à votre assistant de code de le lire, il branche le paiement dans votre projet.
+- **Carte : 1 % (plus les frais de votre compte carte, selon le pays : environ 1,5 % + 0,25 € en Europe). Mobile money : 2 % (les frais de l'opérateur sont payés par le client).** Sans abonnement, sans frais d'installation, sans minimum. [Détail des frais](#ce-que-ça-coûte).
+- **Testez tout gratuitement, avant de donner le moindre document.** Une clé de test suffit pour faire tout le parcours : réussi, refusé, expiré, remboursé, avis reçus par votre serveur. En réel, seule la clé change.
 
 ## Démarrer en 5 minutes
 
@@ -68,7 +71,7 @@ final technasPay = TechnasPayClient(
 final result = await showTechnasPayment(context, backend: technasPay, order: {'orderId': order.id});
 ```
 
-Le détail est dans le README de chaque SDK.
+Le détail est dans le README de chaque SDK (tableau en tête de page).
 
 ## Comprendre les paiements
 
@@ -81,7 +84,7 @@ Le détail est dans le README de chaque SDK.
 | | Commission Technas | Autres frais |
 |---|---|---|
 | Mobile money | 2 % du paiement réussi | Les frais de l'opérateur sont payés par le client, ajoutés au prix. Les frais de chaque reversement vers votre numéro sont à votre charge |
-| Carte | 1 % du paiement réussi | Les frais Stripe, à votre charge, selon votre contrat Stripe |
+| Carte | 1 % du paiement réussi | Les frais de votre compte carte, à votre charge, selon le pays (environ 1,5 % + 0,25 € en Europe) |
 
 Pas d'abonnement, pas de frais d'installation, pas de minimum. La commission n'est pas rendue sur un remboursement. Un paiement refusé ou expiré ne coûte rien.
 
@@ -93,10 +96,10 @@ Au 15 novembre 2026 :
 |---|---|
 | Encaissement mobile money, zone franc CFA | En production |
 | Mode `local` hors zone franc CFA | En production, à activer vous-même |
-| Carte | Fonctionne en mode test. En réel, ouvre quand le compte Stripe de Technas Pay sera activé |
+| Carte | Fonctionne en mode test. En réel, ouvre à l'activation du compte carte de Technas Pay |
 | Reversements mobile money | Branchés, mais pas encore ouverts par notre prestataire mobile money. Votre argent attend sur votre solde. [Détail](docs/versements.md#létat-réel-aujourdhui) |
 | Change des monnaies hors zone en francs CFA (mode `converted`) | Pas encore ouvert |
-| Paquets npm, PyPI et pub.dev | Pas encore publiés : installation depuis GitHub |
+| Paquets npm, PyPI, Packagist, Maven Central et pub.dev | Pas encore publiés : installation depuis GitHub |
 
 ## Comparé aux autres
 
@@ -104,7 +107,7 @@ Des prestataires solides existent déjà en Afrique. Voici ce qu'ils publient eu
 
 | | Commission mobile money | Commission carte | Abonnement | SDK Flutter officiel | Pour encaisser en réel | Reversement |
 |---|---|---|---|---|---|---|
-| **Technas Pay** | 2 % ; frais de l'opérateur payés par le client, en plus | 1 % + frais Stripe | Non | Oui, avec les routes serveur déjà écrites | Aucune pièce (une pièce d'identité pour être reversé) | Chaque lundi dès 10 000 F CFA ; **pas encore ouvert** |
+| **Technas Pay** | 2 % ; frais de l'opérateur payés par le client, en plus | 1 % + frais du compte carte | Non | Oui, avec les routes serveur déjà écrites | Aucune pièce (une pièce d'identité pour être reversé) | Chaque lundi dès 10 000 F CFA ; **pas encore ouvert** |
 | CinetPay | Grille officielle non lisible sans navigateur ([tarifs](https://cinetpay.com/tarifs)) | idem | Non trouvé | Oui ([GitHub](https://github.com/cinetpay)) | Pièces de la société, établie dans le pays ([FAQ](https://cinetpay.com/faq)) | Après une vérification d'identité complète |
 | FedaPay | 1,8 % sur MTN et Moov pour l'offre Tap & Go, Bénin ([FAQ](https://docs.fedapay.com/tap-go/en/faq-en)) ; autres taux non publiés sur la page lue | Non publié sur la page lue | Aucun frais mensuel ([plugin WordPress](https://wordpress.org/plugins/woo-gateway-fedapay)) | Non trouvé ([GitHub](https://github.com/fedapay)) | CNI + IFU + RCCM pour une entreprise ([doc](https://docs.fedapay.com/fr/introduction/compte)) | Non lu sur une page accessible |
 | KKiaPay | 1,5 % (la même page affiche aussi 1,3 %) ([tarifs](https://kkiapay.me/pricing)) | 2,1 % UEMOA, 3 % hors UEMOA | 9 900 F CFA par mois, premier mois offert | Oui ([GitHub](https://github.com/kkiapay)) | Au Bénin : RCCM + IFU + pièce d'identité, ou IFU seul pour un consultant ([doc](https://docs.kkiapay.me/v1/compte/activation-de-compte)) | Tous les 3 jours, chaque semaine ou chaque mois ([FAQ](https://kkiapay.me/faq/?lang=en)) |

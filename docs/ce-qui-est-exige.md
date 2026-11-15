@@ -10,7 +10,7 @@ Technas Pay ne vous demande rien pour commencer. Les pièces arrivent au moment 
 | Encaisser en mobile money | Un compte réel ouvert par Technas et sa clé `tps_live_` | Vos clients paient ; l'argent s'ajoute à votre solde |
 | Être reversé en mobile money | Un numéro de reversement par devise, confirmé par e-mail, **et** une pièce d'identité du dirigeant | Les reversements, jusqu'à 100 000 000 F CFA par mois |
 | Être reversé sans plafond | RCCM et IFU (ou NIF) de votre société | Les reversements sans plafond mensuel |
-| Encaisser par carte | L'inscription de votre compte carte, faite chez Stripe | Les paiements par carte, versés par Stripe sur votre banque |
+| Encaisser par carte | L'inscription de votre compte carte | Les paiements par carte, virés sur votre banque |
 
 ## Encaisser : aucun papier
 
@@ -39,13 +39,13 @@ Un numéro par devise. Vous le fixez par l'API (`setPayoutDestination`), et **le
 
 Voir aussi : [Versements](versements.md).
 
-## La carte : votre compte Stripe
+## La carte : votre compte carte
 
-Pour la carte, Technas crée votre compte Stripe et vous envoie vers l'inscription hébergée par Stripe (`startCardOnboarding`). C'est Stripe qui vous demande votre identité et votre compte bancaire, selon ses propres règles et celles de votre pays. Technas ne voit pas votre IBAN.
+Pour la carte, Technas crée votre compte carte et vous envoie vers son inscription (`startCardOnboarding`). L'inscription se fait sur la page sécurisée de notre partenaire carte (Stripe), qui vous fera accepter son contrat. Il vous demande votre identité et votre compte bancaire, selon ses règles et celles de votre pays. Technas ne voit pas votre IBAN.
 
-Une fois l'inscription finie, vous avez un compte Stripe complet : vous vous connectez à https://dashboard.stripe.com/ avec vos identifiants, vous réglez vos virements et vous suivez vos litiges. Les frais Stripe sont à votre charge, selon votre contrat Stripe.
+Une fois l'inscription finie, vous avez un compte carte complet : `getCardDashboardLink()` vous donne l'adresse de son tableau de bord, où vous vous connectez avec vos identifiants, réglez vos virements et suivez vos litiges. Les frais de ce compte sont à votre charge, selon le pays (environ 1,5 % + 0,25 € en Europe).
 
-État au 15 novembre 2026 : la carte fonctionne en mode test. En réel, elle ouvrira quand le compte Stripe de Technas Pay sera activé.
+État au 15 novembre 2026 : la carte fonctionne en mode test. En réel, elle ouvrira à l'activation du compte carte de Technas Pay.
 
 ## Passer en réel
 

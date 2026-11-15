@@ -8,7 +8,7 @@ Ce qui suit est lu dans le code du serveur Technas Pay, le 15 novembre 2026. Qua
 |---|---|---|---|
 | En mobile money, zone franc CFA | `XOF` ou `XAF`, choisie d'après le pays | Aucune | Rien : c'est le réglage de départ |
 | En mobile money, hors zone franc CFA | La monnaie du pays (cedi, naira…) | 0 ou 2 selon la monnaie | Activer le mode `local` et accepter le risque de change |
-| Par carte | Toute devise que Stripe accepte sur votre compte carte (EUR, USD, XOF…) | Celles de la devise | Un compte carte ouvert |
+| Par carte | Toute devise acceptée par votre compte carte (EUR, USD, XOF…) | Celles de la devise | Un compte carte ouvert |
 
 ## Deux francs CFA, pas un
 
@@ -92,14 +92,14 @@ Aucun paiement mobile money en dollar américain n'est possible. En RD Congo, le
 
 ## Par carte
 
-La carte suit un autre chemin. Vous avez votre propre compte Stripe, le client le paie directement, et la commission Technas est retenue au passage. Technas ne détient pas cet argent.
+La carte suit un autre chemin. Vous avez votre propre compte carte, le client le paie directement, et la commission Technas est retenue au passage. Technas ne détient pas cet argent.
 
 - La devise est **obligatoire** (`currency: "EUR"`, `"USD"`, `"XOF"`…).
-- Toute devise que Stripe accepte sur votre compte est possible.
+- Toute devise acceptée par votre compte carte est possible.
 - Les décimales sont celles de la devise : `49.9` pour 49,90 €. Les devises sans centimes (comme `XOF`) restent entières ; quelques devises en ont trois.
 - Un montant avec trop de décimales est refusé (`invalid_amount`).
 
-État au 15 novembre 2026 : la carte fonctionne en **mode test**. En réel, elle ouvrira quand le compte Stripe de Technas Pay sera activé. Aucune date n'est promise.
+État au 15 novembre 2026 : la carte fonctionne en **mode test**. En réel, elle ouvrira à l'activation du compte carte de Technas Pay. Aucune date n'est promise.
 
 ## Où regarder dans votre SDK
 
