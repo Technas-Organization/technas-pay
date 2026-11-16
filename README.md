@@ -79,11 +79,14 @@ Le client choisit une offre, ouvre la page de paiement, ne paie pas, puis revien
 
 1. **Une référence = un essai.** Nouvelle offre, ou retour après expiration : nouvel essai, avec une nouvelle référence (`retryReference(factureId, n)`). Réutiliser la référence d'un essai d'un autre montant rend `409 reference_conflict` ; celle d'un essai expiré, `409 payment_expired`.
 2. **Une facture n'est payée que sur l'avis `payment.completed`.** Jamais au retour du navigateur sur `returnUrl`, jamais à l'ouverture de la page.
-3. **Un essai non payé ne bloque jamais un nouvel essai.** En attente ou refusé, si le client change d'offre, créez le nouvel essai. Expiré, laissez-le recommencer.
+3. **Un essai non payé ne bloque jamais un nouvel essai.** Expiré, laissez le client recommencer. Autre offre : annulez l'ancien essai (`cancelPayment`), puis créez le nouveau avec une **nouvelle** référence.
+   - Si l'annulation répond `payment_in_progress`, une demande est en cours chez l'opérateur : ne créez pas de second paiement, attendez l'avis de l'issue.
+   - Si elle répond `payment_already_completed`, le client a payé l'ancienne offre : relisez le paiement, ne créez rien.
+   - Un essai annulé passe en `expired`, sans lien de paiement ; son avis `payment.expired` porte `reason: "canceled"` (`"timeout"` quand l'heure est passée).
 4. **Au retour du client, vérifiez d'abord** avec `getPayment` sur le dernier essai, avant de lui dire quoi que ce soit. Ne vous fiez jamais à votre seule base.
 5. **Si un ancien essai est payé après le nouveau,** n'activez rien deux fois : remboursez l'essai en trop avec `refund`.
 
-Les routes toutes faites des SDK appliquent déjà ces règles : un `409 reference_conflict` y fait passer à l'essai suivant.
+Les routes toutes faites des SDK appliquent déjà ces règles : un `409 reference_conflict` y fait passer à l'essai suivant, et l'app peut annuler un essai par `POST /payments/{id}/cancel`.
 
 ## Comprendre les paiements
 
